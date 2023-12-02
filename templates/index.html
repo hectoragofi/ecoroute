@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Folium Map</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="map-container">
+            <iframe class="map" src="/map"></iframe>
+        </div>
+        <div class="data-container">
+            <header>
+                <h1 class="logo">EcoRoute</h1>
+            </header>
+            <section class="data-section">
+                <h2>Route Overview</h2>
+                <form method="post" action="{{ url_for('show_data') }}">
+                    <div class="input-group">
+                        <label for="inputField1">Departure port</label>
+                        <input type="text" id="inputField1" name="inputField1" placeholder="e.g., Piraeus" class="rounded-input" value="{{ request.form['inputField1'] }}">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="inputField2">Arrival port</label>
+                        <input type="text" id="inputField2" name="inputField2" placeholder="e.g., Whitstable" class="rounded-input" value="{{ request.form['inputField2'] }}">
+                    </div>
+
+                    <button type="submit" class="rounded-button">Show Data</button>
+                </form>
+            {% if show_recommended_info %}
+
+                <div class="recommended-info-box">
+                    <h3>Recommended Ship Types:</h3>
+                    <p>Ship Type: {{ ship_type }}</p>
+                    <p>Fuel Type: {{ fuel_type }}</p>
+
+                    <h3>Carbon Emissions:</h3>
+                    {% for i in range(emissions|length) %}
+                        <p>{{ emission_types[i] }}: {{ emissions[i] }} kg</p>
+                    {% endfor %}
+
+                    <h3>The CO2 used is equivalent to:</h3>
+                    <p>The emissions from {{ fun_facts["Cars"] }} cars in a year</p>
+                    <p>Manufacturing transporting and selling {{ fun_facts["iPhone15"] }} Iphone 15s</p>
+                    <p>Making {{ fun_facts["Plastic Bottles"] }} plastic bottles</p>
+                    <p>Walking {{ fun_facts["Walking"] }} kilometers</p>
+                    <p>Watching {{ fun_facts["The Office Episode"] }} episodes</p>
+                </div>
+            {% endif %}
+
+            </section>
+        </div>
+    </div>
+</body>
+</html>
