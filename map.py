@@ -120,7 +120,7 @@ def createLineRoute(origin, destination, m):
     co2_emission = emissions[0]  # CO2 emissions are at the first index
     co2_marker_text = f"Recommended ship type:{mostEfficientShipType}         CO2 Emissions: {co2_emission} kg"
 
-    folium.Marker(location=middle_coordinate, popup=Popup(co2_marker_text),icon=folium.Icon(color='red', icon='ship', prefix='fa')).add_to(m)
+    folium.Marker(location=middle_coordinate, popup=Popup(co2_marker_text),icon=folium.Icon(color='blue', icon='ship', prefix='fa')).add_to(m)
 
     properties = route["properties"]
     print(properties)
@@ -134,10 +134,15 @@ def returnProperties():
     return properties
 
 
-def findCoordinates(departure, arrival):  # Read the CSV file into a DataFrame
+def findCoordinates(departure, arrival):
+    # Read the CSV file into a DataFrame
     df = pd.read_csv('ports.csv')
-    # print(departure)
-    # print(arrival)
+
+    # Check if the departure and arrival ports are in the DataFrame
+    if departure not in df['Main Port Name'].values or arrival not in df['Main Port Name'].values:
+        # Ports not found, return a special value (None in this case)
+        return None, None
+
     # Extract the coordinates for each port
     port1_coordinates = df[df['Main Port Name'] == departure][['Latitude', 'Longitude']].values[0]
     port2_coordinates = df[df['Main Port Name'] == arrival][['Latitude', 'Longitude']].values[0]
