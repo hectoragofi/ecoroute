@@ -2,7 +2,7 @@ from flask import *
 
 import emissions_calculator
 import map
-
+import sqlite3
 
 app = Flask(__name__)
 
@@ -46,7 +46,7 @@ def show_data():
         if empty == False:
             #departureCoordinates, arrivalCoordinates = map.findCoordinates(departure_port, arrival_port)
 
-            map.createLineRoute(departureCoordinates, arrivalCoordinates, mapp)
+            map.createLineRoute(departureCoordinates, arrivalCoordinates)
 
             distance = map.returnProperties()['length']
             speed = 25  # Update with your actual speed

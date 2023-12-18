@@ -20,19 +20,19 @@
             </header>
             <section class="data-section">
                 <h2>Route Overview</h2>
-<form method="post" action="{{ url_for('show_data') }}" onsubmit="return validateForm() && showPopup()">
+                    <form method="post" action="{{ url_for('show_data') }}" onsubmit="return validateForm() && showPopup()">
 
 
 
-<div class="input-group">
-    <label for="inputField1">Departure port</label>
-    <input type="text" id="inputField1" name="inputField1" placeholder="e.g., Piraeus" class="rounded-input {% if not valid_departure %}error-input{% endif %}" value="{{ request.form['inputField1'] }}">
-</div>
+                    <div class="input-group">
+                        <label for="inputField1">Departure port</label>
+                        <input type="text" id="inputField1" name="inputField1" placeholder="e.g., Piraeus" class="rounded-input {% if not valid_departure %}error-input{% endif %}" value="{{ request.form['inputField1'] }}">
+                    </div>
 
-<div class="input-group">
-    <label for="inputField2">Arrival port</label>
-    <input type="text" id="inputField2" name="inputField2" placeholder="e.g., Whitstable" class="rounded-input {% if not valid_arrival %}error-input{% endif %}" value="{{ request.form['inputField2'] }}">
-</div>
+                    <div class="input-group">
+                        <label for="inputField2">Arrival port</label>
+                        <input type="text" id="inputField2" name="inputField2" placeholder="e.g., Whitstable" class="rounded-input {% if not valid_arrival %}error-input{% endif %}" value="{{ request.form['inputField2'] }}">
+                    </div>
 
 
                 <button type="submit" class="rounded-button">Show Data</button>
